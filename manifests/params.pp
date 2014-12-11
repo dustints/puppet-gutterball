@@ -1,8 +1,8 @@
 class gutterball::params {
   $gutterball_conf_file = '/etc/gutterball/gutterball.conf'
   $dbuser = 'gutterball'
-  $dbpassword = 'redhat'
-  $keystore_password_file = undef
+  $dbpassword = 'gutterball'
+  $keystore_password = undef
 
   $tomcat = $::osfamily ? {
     /^(RedHat|Linux)/ => $::operatingsystem ? {

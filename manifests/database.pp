@@ -21,7 +21,8 @@ class gutterball::database{
         --url=jdbc:postgresql:gutterball \
         --username=${gutterball::dbuser}\
         --password=${gutterball::dbpassword}\
-        update"
+        update",
+    refreshonly => true
   }
 
 }

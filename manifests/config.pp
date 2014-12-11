@@ -2,8 +2,7 @@
 class gutterball::config(
   $dbuser = $gutterball::dbuser,
   $dbpass = $gutterball::dbpassword,
-  $keystore_password_file = $gutterball::keystore_password_file,
-  $truststore_password_file = $guterball::keystore_password_file,
+  $keystore_password = $gutterball::keystore_password_file,
 ){
   user { 'gutterball':
     ensure => present
