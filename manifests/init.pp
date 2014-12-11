@@ -25,7 +25,7 @@ class gutterball (
 
 
   # TODO
-  #class { 'gutterball::install': } ~>
+  class { 'gutterball::install': } ~>
   class { 'gutterball::config':  } ~>
   class { 'gutterball::database': } ~>
   class { 'gutterball::service': } ~>
