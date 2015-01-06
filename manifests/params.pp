@@ -14,4 +14,22 @@ class gutterball::params {
     }
   }
 
+  case $::osfamily {
+    'RedHat': {
+      case $::operatingsystem {
+        'Fedora': {
+          $scl_prefix = ''
+          $scl_root = ''
+        }
+        default: {
+          $scl_prefix = 'ruby193-'
+          $scl_root = '/opt/rh/ruby193/root'
+        }
+      }
+    }
+    default: {
+      fail("${::hostname}: This module does not support osfamily ${::osfamily}")
+    }
+  }
+
 }
