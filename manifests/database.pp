@@ -1,7 +1,7 @@
 class gutterball::database{
   include postgresql::server
 
-  postgresql::server::pg_hba_rule { 'allow authenticated users over ipv4 loopback':
+  postgresql::server::pg_hba_rule { 'zzz allow authenticated users over ipv4 loopback':
     type        => 'host',
     database    => 'all',
     user        => 'all',
