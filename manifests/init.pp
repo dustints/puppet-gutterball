@@ -29,8 +29,10 @@ class gutterball (
   $tomcat = $gutterball::params::tomcat,
 ) inherits gutterball::params {
 
+  $_ = cache_data('gutterball_db_password', $dbpassword)
+  $__ = cache_data('gutterball_db_user', $dbuser)
+  $___ = cache_data('gutterball_tomcat', $tomcat)
 
-  # TODO
   class { 'gutterball::install': } ~>
   class { 'gutterball::config':
     amqp_broker_host  => $amqp_broker_host,
