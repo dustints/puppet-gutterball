@@ -1,0 +1,54 @@
+#!/bin/bash
+
+USERNAME=<%= scope.lookupvar('::gutterball::dbuser') %>
+PASSWORD=<%= scope.lookupvar('::gutterball::dbpassword') %>
+
+usage() {
+cat <<EOF
+Usage: $0 [options]
+
+    Options:
+      migrate Runs liquibase migration
+      --username DB username
+      --password DB password
+EOF
+}
+
+[ $# -eq 0 ] && usage && exit 1
+
+while test $# -gt 0; do
+  case "$1" in
+      -h|help)
+        usage
+        exit 1
+        ;;
+      migrate)
+        gutterball_migrate=true
+        shift
+        ;;
+      --username*)
+        shift
+        export USERNAME=`echo $1 | sed -e 's/^[^=]*=//g'`
+        shift
+        ;;
+      --password*)
+        shift
+        export PASSWORD=`echo $1 | sed -e 's/^[^=]*=//g'`
+        shift
+        ;;
+      *)
+        break
+        ;;
+   esac
+done
+
+if [ "$gutterball_migrate" == true ];
+then
+  /usr/bin/liquibase --driver=org.postgresql.Driver \
+  --classpath=/usr/share/java/postgresql-jdbc.jar:/var/lib/<%= scope.lookupvar('::gutterball::tomcat') %>/webapps/gutterball/WEB-INF/classes/ \
+          --changeLogFile=db/changelog/changelog.xml \
+          --url=jdbc:postgresql:gutterball \
+          --username=$USERNAME\
+          --password=$PASSWORD\
+          update
+fi
